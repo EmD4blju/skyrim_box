@@ -1,0 +1,14 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: skyrim_postgres
+    environment:
+      POSTGRES_USER: skyrim_user
+      POSTGRES_PASSWORD: skyrim_password
+      POSTGRES_DB: skyrim_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./database:/var/lib/postgresql/data
+    command: postgres -c wal_level=logical
+    restart: unless-stopped
