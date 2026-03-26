@@ -105,3 +105,16 @@ services:
       - ./spark_scripts:/opt/spark/work-dir
     restart: unless-stopped
 
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: skyrim_kafka_ui
+    ports:
+      - "8090:8080" # Mapping to 8090 because Spark Master uses 8080
+    environment:
+      KAFKA_CLUSTERS_0_NAME: 'Skyrim Box Kafka'
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: 'kafka:29092'
+      DYNAMIC_CONFIG_ENABLED: 'true'
+    depends_on:
+      - kafka
+    restart: unless-stopped
+
