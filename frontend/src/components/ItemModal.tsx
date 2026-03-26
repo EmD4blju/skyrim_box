@@ -77,7 +77,7 @@ export const ItemModal = ({ item, onClose }: ItemModalProps) => {
                   value={commentText}
                   onChange={(e) => setCommentText(e.target.value)}
                   placeholder="Share your experience with this artifact..."
-                  className="w-full bg-stone-900 border border-stone-700 rounded-md p-3 text-gray-200 focus:outline-none focus:border-yellow-600 min-h-[100px] mb-3 resize-y"
+                  className="w-full bg-stone-900 border border-stone-700 rounded-md p-3 text-gray-200 focus:outline-none focus:border-yellow-600 min-h-25 mb-3 resize-y"
                   autoFocus
                 />
                 <div className="flex justify-end gap-3">
