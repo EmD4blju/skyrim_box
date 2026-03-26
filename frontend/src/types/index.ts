@@ -10,4 +10,5 @@ export interface Comment {
   content: string;
   user_id: number;
   item_id: number;
+  created_at: string;
 }

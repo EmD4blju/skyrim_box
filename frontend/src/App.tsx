@@ -1,8 +1,12 @@
+import { useState } from 'react';
 import { useItems } from './hooks/useItems';
 import heroBanner from './assets/hero_banner.jpg';
+import type { Item } from './types';
+import { ItemModal } from './components/ItemModal';
 
 function App() {
   const { data: items, isLoading, isError } = useItems();
+  const [selectedItem, setSelectedItem] = useState<Item | null>(null);
 
   return (
     <div className="min-h-screen bg-stone-900 text-gray-200 font-serif">
@@ -48,6 +52,7 @@ function App() {
               <div 
                 key={item.id} 
                 className="bg-stone-800 border border-stone-700 rounded-lg overflow-hidden shadow-2xl hover:border-yellow-600 transition-all duration-300 group cursor-pointer"
+                onClick={() => setSelectedItem(item)}
               >
                 <div className="h-48 bg-stone-700 flex items-center justify-center relative overflow-hidden">
                    {/* Optional graphic placeholder depending on name */}
@@ -66,6 +71,14 @@ function App() {
           </div>
         )}
       </main>
+
+      {/* Item Modal Overlay */}
+      {selectedItem && (
+        <ItemModal 
+          item={selectedItem} 
+          onClose={() => setSelectedItem(null)} 
+        />
+      )}
     </div>
   )
 }

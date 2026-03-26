@@ -51,7 +51,12 @@ def get_item_comments(item_id: int, session: Session = Depends(get_session)):
     if not item:
         raise HTTPException(status_code=404, detail="Item not found")
         
-    comments = session.exec(select(Comment).where(Comment.item_id == item_id)).all()
+    # Sort placing newest first, but ensuring NULLs (old migrations) gracefully fall to the bottom instead of top
+    comments = session.exec(
+        select(Comment)
+        .where(Comment.item_id == item_id)
+        .order_by(Comment.created_at.desc().nulls_last())
+    ).all()
     return comments
 
 # 3. Post Comment
