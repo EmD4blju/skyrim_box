@@ -23,6 +23,7 @@ df = spark.readStream \
     .option("kafka.bootstrap.servers", "kafka:29092") \
     .option("subscribePattern", "skyrim.public.*") \
     .option("startingOffsets", "earliest") \
+    .option("failOnDataLoss", "false") \
     .load()
 
 # 2. Extract and transform the Kafka payload
