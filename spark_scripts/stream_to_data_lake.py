@@ -1,5 +1,5 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, expr, from_json
+from pyspark.sql.functions import col, expr, from_json, get_json_object
 
 # Initialize SparkSession with required S3/AWS and Kafka packages
 spark = SparkSession.builder \
@@ -32,8 +32,8 @@ df = spark.readStream \
 parsed_df = df.select(
     col("topic"),
     col("timestamp"),
-    col("key").cast("string").alias("key_str"),
-    col("value").cast("string").alias("value_str")
+    get_json_object(col("key").cast("string"), "$.payload.id").alias("key_str"),
+    get_json_object(col("value").cast("string"), "$.payload.after.content").alias("value_str")
 )
 
 # 3. Write the stream to S3 (MinIO) in JSON format, partitioned by the Kafka topic

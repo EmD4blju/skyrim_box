@@ -55,3 +55,14 @@ A platform similar to IMDb or Filmweb, but tailored for **Skyrim items**. The pr
 ### Phase 5: The Data Lake
 - Write a PySpark script to consume Kafka topics in real-time.
 - Transform and write the ingested data into MinIO as Parquet/Delta files.
+
+
+### LAUNCH
+
+```
+uv run setup_debezium.py
+```
+
+```
+docker exec -it skyrim_spark_master /opt/spark/bin/spark-submit   --conf spark.jars.ivy=/tmp/.ivy   --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0,org.apache.hadoop:hadoop-aws:3.3.4,com.amazonaws:aws-java-sdk-bundle:1.12.262   /opt/spark/work-dir/stream_to_data_lake.py
+```
