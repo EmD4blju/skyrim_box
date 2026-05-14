@@ -58,9 +58,9 @@ A platform similar to IMDb or Filmweb, but tailored for **Skyrim items**. The pr
 
 
 ### LAUNCH
-
+Need to have astral-uv installed
 ```
-uv run setup_debezium.py
+./launch.sh
 ```
 
 ```
